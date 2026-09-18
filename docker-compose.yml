@@ -1,0 +1,18 @@
+services:
+  plaucket:
+    build: .
+    ports:
+      - "8788:8788"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      PLAUCKET_ACCESS_TOKEN: ${PLAUCKET_ACCESS_TOKEN}
+      OPENAI_TRANSCRIPTION_MODEL: ${OPENAI_TRANSCRIPTION_MODEL:-gpt-4o-mini-transcribe}
+      OPENAI_ANALYSIS_MODEL: ${OPENAI_ANALYSIS_MODEL:-gpt-4o-mini}
+      LOCAL_STORAGE_PATH: /data
+      PORT: 8788
+    volumes:
+      - plaucket_data:/data
+    restart: unless-stopped
+
+volumes:
+  plaucket_data:
