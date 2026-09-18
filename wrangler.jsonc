@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "plaucket",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "r2_buckets": [
+    {
+      "binding": "RECORDINGS_BUCKET",
+      "bucket_name": "plaucket-recordings",
+      "preview_bucket_name": "plaucket-recordings-dev"
+    }
+  ],
+  "vars": {
+    "OPENAI_TRANSCRIPTION_MODEL": "gpt-4o-mini-transcribe",
+    "OPENAI_ANALYSIS_MODEL": "gpt-4o-mini"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
